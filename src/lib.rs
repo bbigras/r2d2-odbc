@@ -14,12 +14,12 @@ pub struct ODBCConnectionManager {
     connection_string: String
 }
 
-pub struct ODBCConnection<'a>(Connection<'a>);
+pub struct ODBCConnection<'a>(Connection<'a, odbc_safe::AutocommitOn>);
 
 unsafe impl Send for ODBCConnection<'static> {}
 
 impl <'a> ODBCConnection<'a> {
-    pub fn raw(&self) -> &Connection<'a> {
+    pub fn raw(&self) -> &Connection<'a, odbc_safe::AutocommitOn> {
         &self.0
     }
 }
