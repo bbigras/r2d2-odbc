@@ -34,7 +34,7 @@ unsafe impl Send for ODBCEnv {}
 pub struct ODBCError(Box<Error>);
 
 lazy_static! {
-    static ref ENV: ODBCEnv = ODBCEnv(create_environment_v3().unwrap());
+    static ref ENV: ODBCEnv = ODBCEnv(create_environment_v3_with_os_db_encoding("utf-8", "latin1").unwrap());
 }
 
 impl Error for ODBCError {
